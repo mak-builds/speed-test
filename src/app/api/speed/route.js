@@ -1,7 +1,27 @@
+// export async function GET() {
+//   const size = 5 * 1024 * 1024; // 5 MB
+//   const buffer = new Uint8Array(size);
+//   const chunkSize = 65536; // 64 KB
+
+//   for (let i = 0; i < size; i += chunkSize) {
+//     const end = Math.min(i + chunkSize, size);
+//     crypto.getRandomValues(buffer.subarray(i, end));
+//   }
+
+//   return new Response(buffer, {
+//     headers: {
+//       "Content-Type": "application/octet-stream",
+//       "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+//       Pragma: "no-cache",
+//       Expires: "0",
+//     },
+//   });
+// }
+
 export async function GET() {
-  const size = 5 * 1024 * 1024; // 5 MB
+  const size = 25 * 1024 * 1024; // 25 MB
   const buffer = new Uint8Array(size);
-  const chunkSize = 65536; // 64 KB
+  const chunkSize = 65536;
 
   for (let i = 0; i < size; i += chunkSize) {
     const end = Math.min(i + chunkSize, size);
@@ -11,9 +31,7 @@ export async function GET() {
   return new Response(buffer, {
     headers: {
       "Content-Type": "application/octet-stream",
-      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
-      Pragma: "no-cache",
-      Expires: "0",
+      "Cache-Control": "no-store, no-cache, must-revalidate",
     },
   });
 }
