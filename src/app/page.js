@@ -55,20 +55,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import SpeedMeter from "./components/speedMeter";
-import InfoPanel from "./components/infoPanel";
 
 export default function Home() {
   const [download, setDownload] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [userInfo, setUserInfo] = useState(null);
-
-  // Fetch user info (location, ISP, etc.)
-  useEffect(() => {
-    fetch("https://ipapi.co/json/")
-      .then((res) => res.json())
-      .then((data) => setUserInfo(data))
-      .catch(() => setUserInfo(null));
-  }, []);
 
   const testDownload = async () => {
     const response = await fetch("/api/speed?nocache=" + Math.random(), {
@@ -109,8 +99,6 @@ export default function Home() {
         >
           {loading ? "Testing..." : "Start Test"}
         </button>
-
-        <InfoPanel userInfo={userInfo} />
       </div>
       <p className="mt-8 text-gray-400 text-sm">Built with ❤️ using Next.js</p>
     </main>
