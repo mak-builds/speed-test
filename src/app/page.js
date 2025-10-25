@@ -59,7 +59,6 @@ import InfoPanel from "./components/infoPanel";
 
 export default function Home() {
   const [download, setDownload] = useState(null);
-  const [upload, setUpload] = useState(null);
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
 
@@ -87,53 +86,12 @@ export default function Home() {
     return (bytesReceived * 8) / duration / 1024 / 1024;
   };
 
-  // const testUpload = async () => {
-  //   const size = 10 * 1024 * 1024; // 10 MB
-  //   const buffer = new Uint8Array(size);
-  //   crypto.getRandomValues(buffer);
-  //   const startTime = performance.now();
-  //   const response = await fetch("/api/upload", {
-  //     method: "POST",
-  //     body: buffer,
-  //   });
-  //   const duration = (performance.now() - startTime) / 1000;
-  //   const bitsUploaded = size * 8;
-  //   return bitsUploaded / duration / 1024 / 1024;
-  // };
-
-  const testUpload = async () => {
-    const size = 4 * 1024 * 1024; // 6 MB
-    const buffer = new Uint8Array(size);
-    const chunkSize = 65536; // 64 KB max allowed
-
-    // Fill in chunks
-    for (let i = 0; i < size; i += chunkSize) {
-      const end = Math.min(i + chunkSize, size);
-      crypto.getRandomValues(buffer.subarray(i, end));
-    }
-
-    const startTime = performance.now();
-    await fetch("/api/upload", {
-      method: "POST",
-      body: buffer,
-    });
-    const endTime = performance.now();
-
-    const duration = (endTime - startTime) / 1000;
-    const bitsUploaded = size * 8;
-    return bitsUploaded / duration / 1024 / 1024;
-  };
-
   const startTest = async () => {
     setLoading(true);
     setDownload(null);
-    setUpload(null);
 
     const dl = await testDownload();
     setDownload(parseFloat(dl.toFixed(2)));
-
-    const ul = await testUpload();
-    setUpload(parseFloat(ul.toFixed(2)));
 
     setLoading(false);
   };
@@ -143,7 +101,7 @@ export default function Home() {
       <div className="bg-white/10 backdrop-blur-md p-10 rounded-2xl shadow-lg w-[90%] sm:w-[400px] text-center">
         <h1 className="text-3xl font-bold mb-8">FAST Clone</h1>
 
-        <SpeedMeter download={download} upload={upload} loading={loading} />
+        <SpeedMeter download={download} loading={loading} />
 
         <button
           onClick={startTest}

@@ -19,14 +19,6 @@ export default function SpeedMeter({ download, upload, loading }) {
         </p>
         <p className="text-gray-400 text-lg">Mbps</p>
       </div>
-
-      <div className="my-4">
-        <p className="text-sm uppercase text-gray-400">Upload</p>
-        <p className="text-6xl font-bold">
-          {loading && !upload ? "..." : upload ? upload.toFixed(2) : "--"}
-        </p>
-        <p className="text-gray-400 text-lg">Mbps</p>
-      </div>
     </div>
   );
 }
