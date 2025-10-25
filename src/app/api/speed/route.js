@@ -21,7 +21,7 @@
 export const dynamic = "force-dynamic"; // 👈 important: disable ISR
 
 export async function GET() {
-  const size = 25 * 1024 * 1024; // 25 MB
+  const size = 10 * 1024 * 1024; // 25 MB
   const buffer = new Uint8Array(size);
   const chunkSize = 65536; // 64 KB limit per getRandomValues
 

@@ -102,7 +102,7 @@ export default function Home() {
   // };
 
   const testUpload = async () => {
-    const size = 10 * 1024 * 1024; // 10 MB
+    const size = 6 * 1024 * 1024; // 6 MB
     const buffer = new Uint8Array(size);
     const chunkSize = 65536; // 64 KB max allowed
 
